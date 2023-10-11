@@ -17,6 +17,7 @@ public class Main {
         List<Order> ordine = new ArrayList<>();
         ordine.add(Order.Ordersetter(arrProducts, 6, costumer));
         secondoEs(ordine);
+        terzoEs(arrProducts);
     }
 
     public static void primoEs(List<Product> arrProducts) {
@@ -37,6 +38,19 @@ public class Main {
         for (int i = 0; i < ordine.size(); i++) {
             ordine.get(i).getProducts().stream().filter(product -> product.getCategory().equals("Baby")).forEach(elem -> System.out.println(elem));
         }
+    }
+
+    public static void terzoEs(List<Product> arrProducts) {
+        for (int i = 0; i < arrProducts.size(); i++) {
+            if (arrProducts.get(i).getCategory().equals("Boys")) {
+                double a = arrProducts.get(i).getPrice();
+                double tot = a * 0.9;
+                double rounded = Math.round(tot * 100.0) / 100.0;
+                arrProducts.get(i).setPrice(rounded);
+            }
+        }
+
+        arrProducts.stream().filter(product -> product.getCategory().equals("Boys")).forEach(elem -> System.out.println(elem));
     }
 
     public static List<Product> createProductArr() {
