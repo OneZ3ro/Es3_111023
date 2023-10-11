@@ -1,56 +1,55 @@
 import entities.Costumer;
 import entities.Order;
 import entities.Product;
+import entities.StringMod;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        int defaultDaysForDelivery = 2;
+        StringMod wrapper = s -> "\n-------------------------------- " + s + " --------------------------------\n";
         List<Product> arrProducts = new ArrayList<>(createProductArr());
-        Costumer costumer = new Costumer("Angelo");
-        primoEs(arrProducts);
+        Costumer costumer = new Costumer("Gino");
+        Costumer costumer2 = new Costumer("Franco");
+        Costumer costumer3 = new Costumer("Roberto");
+        costumer2.setTier(2);
+        costumer3.setTier(2);
+
+        primoEs(arrProducts, wrapper);
+
         List<Order> ordine = new ArrayList<>();
         ordine.add(Order.Ordersetter(arrProducts, 6, costumer));
-        secondoEs(ordine);
-        terzoEs(arrProducts);
+        secondoEs(ordine, wrapper);
+
+        terzoEs(arrProducts, wrapper);
+
+        ordine.add(Order.Ordersetter(arrProducts, 4, costumer2));
+        ordine.add(Order.Ordersetter(arrProducts, 5, costumer3));
+
     }
 
-    public static void primoEs(List<Product> arrProducts) {
-        arrProducts.stream().filter(product -> product.getPrice() > 100 && product.getCategory().equals("Books")).forEach(elem -> System.out.println(elem));
+    public static void primoEs(List<Product> arrProducts, StringMod wrapper) {
+        System.out.println(wrapper.modify("Es1"));
+        arrProducts.stream().filter(product -> product.getPrice() > 100 && product.getCategory().equals("Books")).forEach(System.out::println);
     }
-//    public static List<Product> createProductArr(String category, int howMany) {
-//        List<Product> arrProd = new ArrayList<>();
-//        Random rndm = new Random();
-//        for (int i = 0; i < howMany; i++) {
-//            double rounded = Math.round(rndm.nextDouble(10, 200) * 100.0) / 100.0;
-//            Product prod = new Product("Art-" + category + "-" + (i+1), category, rounded);
-//            arrProd.add(prod);
-//        }
-//        return arrProd;
-//    }
 
-    public static void secondoEs(List<Order> ordine) {
+    public static void secondoEs(List<Order> ordine, StringMod wrapper) {
+        System.out.println(wrapper.modify("Es2"));
+        System.out.println(wrapper.modify("Ordine completo"));
         for (int i = 0; i < ordine.size(); i++) {
-            ordine.get(i).getProducts().stream().filter(product -> product.getCategory().equals("Baby")).forEach(elem -> System.out.println(elem));
+            ordine.get(i).getProducts().forEach(System.out::println);
+        }
+        System.out.println(wrapper.modify("Ordine solo baby"));
+        for (int i = 0; i < ordine.size(); i++) {
+            ordine.get(i).getProducts().stream().filter(product -> product.getCategory().equals("Baby")).forEach(System.out::println);
         }
     }
 
-    public static void terzoEs(List<Product> arrProducts) {
-        for (int i = 0; i < arrProducts.size(); i++) {
-            if (arrProducts.get(i).getCategory().equals("Boys")) {
-                double a = arrProducts.get(i).getPrice();
-                double tot = a * 0.9;
-                double rounded = Math.round(tot * 100.0) / 100.0;
-                arrProducts.get(i).setPrice(rounded);
-            }
-        }
-
-        arrProducts.stream().filter(product -> product.getCategory().equals("Boys")).forEach(elem -> System.out.println(elem));
+    public static void terzoEs(List<Product> arrProducts, StringMod wrapper) {
+        System.out.println(wrapper.modify("Es3"));
+        List<Product> xyz = arrProducts.stream().filter(product -> product.getCategory().equals("Boys")).map(price -> {price.setPrice(Math.round((price.getPrice() * 0.9) * 100.0) / 100.0);return price;}).toList();
+        xyz.forEach(System.out::println);
     }
 
     public static List<Product> createProductArr() {

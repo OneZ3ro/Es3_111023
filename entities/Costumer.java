@@ -14,6 +14,10 @@ public class Costumer {
         this.id = rndm.nextInt(3000, 4000);
     }
 
+    public void setTier(int tier) {
+        this.tier = tier;
+    }
+
     @Override
     public String toString() {
         return "Costumer{" +
