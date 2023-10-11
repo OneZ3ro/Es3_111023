@@ -7,10 +7,10 @@ public class Costumer {
     private String name;
     private int tier;
 
-    public Costumer(String name, int tier) {
+    public Costumer(String name) {
         Random rndm = new Random();
         this.name = name;
-        this.tier = tier;
+        this.tier = 1;
         this.id = rndm.nextInt(3000, 4000);
     }
 
@@ -20,6 +20,6 @@ public class Costumer {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", tier=" + tier +
-                "}\n";
+                "}";
     }
 }

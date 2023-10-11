@@ -1,6 +1,7 @@
 package entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -22,6 +23,21 @@ public class Order {
         this.id = rndm.nextInt(2000, 3000);
     }
 
+    public static Order Ordersetter(List<Product> arrayList, int n, Costumer costumer) {
+        List<Product> app = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        Random rndm = new Random();
+
+        for (int i = 0; i < n; i++) {
+            app.add(arrayList.get(rndm.nextInt(0, arrayList.size())));
+        }
+        return new Order("ok", today, today.plusDays(3), app, costumer);
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -31,6 +47,6 @@ public class Order {
                 ", deliveryDate=" + deliveryDate +
                 ", products=" + products +
                 ", customer=" + customer +
-                "}\n";
+                "}";
     }
 }

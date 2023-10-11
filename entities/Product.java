@@ -15,6 +15,39 @@ public class Product {
         this.price = price;
         this.id = rndm.nextInt(1000, 2000);
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -22,6 +55,6 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
                 ", price=" + price +
-                "}\n";
+                "}";
     }
 }
